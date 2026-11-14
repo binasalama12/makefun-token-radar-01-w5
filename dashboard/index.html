@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Radar — growth-first token launch board</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>&#128293; Momentum Radar</h1>
+    <p class="sub">Growth-first board of protocols that record no token yet — ranked by implied launch value.</p>
+  </div>
+  <div class="meta" id="meta">Loading snapshot…</div>
+</header>
+<nav class="views">
+  <a href="?view=board" id="nav-board">Board</a>
+  <a href="?view=filtered&amp;f=Lending" id="nav-filtered">Filtered</a>
+  <span class="hint">Click any row for its detail view and farm plan.</span>
+</nav>
+<section class="controls" id="controls">
+  <label>Search <input id="q" type="text" placeholder="protocol, category or chain…" autocomplete="off"></label>
+  <label>Category
+    <select id="cat"><option value="">All categories</option></select>
+  </label>
+  <label>Sort
+    <select id="sort">
+      <option value="rank">Implied value (rank)</option>
+      <option value="growth">7d growth (momentum)</option>
+      <option value="tvl">TVL</option>
+      <option value="age">Age (days listed)</option>
+    </select>
+  </label>
+  <button id="growthToggle" type="button" aria-pressed="false">Growth-sorted: off</button>
+</section>
+<main>
+  <section id="boardView">
+    <p class="model" id="modelLine"></p>
+    <table id="board">
+      <thead><tr>
+        <th data-k="rank">Rank</th><th data-k="name">Protocol</th><th data-k="category">Category</th>
+        <th data-k="chains">Chains</th><th data-k="tvl">TVL</th>
+        <th data-k="growth" class="mom">Momentum (7d)</th><th data-k="implied">Implied value</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="count" id="count"></p>
+  </section>
+  <section id="detailView" hidden>
+    <p><a href="?view=board" class="back">&larr; Back to the board</a></p>
+    <div id="detail"></div>
+  </section>
+</main>
+<footer>
+  <p>Model: implied = TVL &times; 0.25 &times; (1 + clamp(7d change, -40, 200)% &times; 1.2) &times; (0.7 + 0.3 &times; age / 1095 days). Growth dominates the ranking; age adds at most 30%. Every figure comes from the sealed DefiLlama snapshot — a protocol is listed as recording no token, never as having none.</p>
+  <p>Farm plans are the entry's own reading: each step states a cost and a time, with one qualifying action every week. Nothing here is investment advice.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
